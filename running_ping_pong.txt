@@ -1,0 +1,587 @@
+# Required Dependencies to install on fresh ubuntu
+sudo apt-get update
+sudo DEBIAN_FORNTEND=noninteractive apt-get -y install git curl nano vim clang rsync libssl-dev protobuf-compiler libudev-dev libsystemd-dev lld llvm
+
+sudo apt-get update
+sudo DEBIAN_FORNTEND=noninteractive apt-get -y install g++ gcc binutils pkg-config dpkg-dev libsctp1 libctp-dev
+
+sudo apt-get clean
+
+
+sudo dpkg --add-architecture arm64
+
+sudo apt-get update
+sudo DEBIAN_FORNTEND=noninteractive apt-get -y install g++-aarch64-linux-gnu gcc-aarch64-linux-gnu binutils-aarch64-linux-gnu pkg-config-aarch64-linux-gnu dpkg-dev libsctp1:arm64 libsctp-dev:arm64 libsystemd-dev:arm64 libudev-dev:arm64
+
+curl https://sh.rustup.rs -sSf | bash -s -- -y --default-toolchain=1.66.0
+
+# How to run the example
+
+```
+## then change to the ellora folder and run command: cargo build
+#then run:cargo build --example ping
+#then run:cargo build --example pong
+# then check what the local ip address is by running: ip addr
+# connect ethernet to your client device
+# on laptop/host run ./target/debug/examples/pong --bind 0.0.0.0:3300
+# on client device run  ./target/debug/examples/ping --bind 192.168.8.134:3300
+```
+
+## the output of pong shows
+
+```
+michael@workhorse3:~/ellora$ ./target/debug/examples/pong --bind 0.0.0.0:3300
+ping
+matches.server: 0.0.0.0:3300
+received: ReceivedData {
+    payload: [
+        115,
+        99,
+        116,
+
+```
+
+## Pong and Ping example, note pong must run first
+```
+michael@workhorse3:~/ellora$ ./target/debug/examples/pong --bind 0.0.0.0:3300
+ping
+matches.server: 0.0.0.0:3300
+received: ReceivedData {
+    payload: [
+        115,
+        99,
+        116,
+        112,
+        45,
+        114,
+        115,
+        32,
+        112,
+        105,
+        110,
+        103,
+        32,
+        58,
+        32,
+        48,
+    ],
+    rcv_info: None,
+    nxt_info: None,
+}
+received: ReceivedData {
+    payload: [
+        115,
+        99,
+        116,
+        112,
+        45,
+        114,
+        115,
+        32,
+        112,
+        105,
+        110,
+        103,
+        32,
+        58,
+        32,
+        49,
+    ],
+    rcv_info: None,
+    nxt_info: None,
+}
+received: ReceivedData {
+    payload: [
+        115,
+        99,
+        116,
+        112,
+        45,
+        114,
+        115,
+        32,
+        112,
+        105,
+        110,
+        103,
+        32,
+        58,
+        32,
+        50,
+    ],
+    rcv_info: None,
+    nxt_info: None,
+}
+received: ReceivedData {
+    payload: [
+        115,
+        99,
+        116,
+        112,
+        45,
+        114,
+        115,
+        32,
+        112,
+        105,
+        110,
+        103,
+        32,
+        58,
+        32,
+        51,
+    ],
+    rcv_info: None,
+    nxt_info: None,
+}
+received: ReceivedData {
+    payload: [
+        115,
+        99,
+        116,
+        112,
+        45,
+        114,
+        115,
+        32,
+        112,
+        105,
+        110,
+        103,
+        32,
+        58,
+        32,
+        52,
+    ],
+    rcv_info: None,
+    nxt_info: None,
+}
+received: ReceivedData {
+    payload: [
+        115,
+        99,
+        116,
+        112,
+        45,
+        114,
+        115,
+        32,
+        112,
+        105,
+        110,
+        103,
+        32,
+        58,
+        32,
+        53,
+    ],
+    rcv_info: None,
+    nxt_info: None,
+}
+received: ReceivedData {
+    payload: [
+        115,
+        99,
+        116,
+        112,
+        45,
+        114,
+        115,
+        32,
+        112,
+        105,
+        110,
+        103,
+        32,
+        58,
+        32,
+        54,
+    ],
+    rcv_info: None,
+    nxt_info: None,
+}
+received: ReceivedData {
+    payload: [
+        115,
+        99,
+        116,
+        112,
+        45,
+        114,
+        115,
+        32,
+        112,
+        105,
+        110,
+        103,
+        32,
+        58,
+        32,
+        55,
+    ],
+    rcv_info: None,
+    nxt_info: None,
+}
+received: ReceivedData {
+    payload: [
+        115,
+        99,
+        116,
+        112,
+        45,
+        114,
+        115,
+        32,
+        112,
+        105,
+        110,
+        103,
+        32,
+        58,
+        32,
+        56,
+    ],
+    rcv_info: None,
+    nxt_info: None,
+}
+received: ReceivedData {
+    payload: [
+        115,
+        99,
+        116,
+        112,
+        45,
+        114,
+        115,
+        32,
+        112,
+        105,
+        110,
+        103,
+        32,
+        58,
+        32,
+        57,
+    ],
+    rcv_info: None,
+    nxt_info: None,
+}
+received: ReceivedData {
+    payload: [],
+    rcv_info: None,
+    nxt_info: None,
+}
+michael@workhorse3:~/ellora$ ./target/debug/examples/ping --server 192.168.8.20:7000
+ping
+matches.server: 192.168.8.20:7000
+conected: ConnectedSocket {
+    inner: AsyncFd {
+        inner: Some(
+            6,
+        ),
+    },
+}, assoc_id: 24
+received: Data(
+    ReceivedData {
+        payload: [
+            112,
+            111,
+            110,
+            103,
+            58,
+            32,
+            115,
+            99,
+            116,
+            112,
+            45,
+            114,
+            115,
+            32,
+            112,
+            105,
+            110,
+            103,
+            32,
+            58,
+            32,
+            48,
+        ],
+        rcv_info: None,
+        nxt_info: None,
+    },
+)
+received: Data(
+    ReceivedData {
+        payload: [
+            112,
+            111,
+            110,
+            103,
+            58,
+            32,
+            115,
+            99,
+            116,
+            112,
+            45,
+            114,
+            115,
+            32,
+            112,
+            105,
+            110,
+            103,
+            32,
+            58,
+            32,
+            49,
+        ],
+        rcv_info: None,
+        nxt_info: None,
+    },
+)
+received: Data(
+    ReceivedData {
+        payload: [
+            112,
+            111,
+            110,
+            103,
+            58,
+            32,
+            115,
+            99,
+            116,
+            112,
+            45,
+            114,
+            115,
+            32,
+            112,
+            105,
+            110,
+            103,
+            32,
+            58,
+            32,
+            50,
+        ],
+        rcv_info: None,
+        nxt_info: None,
+    },
+)
+received: Data(
+    ReceivedData {
+        payload: [
+            112,
+            111,
+            110,
+            103,
+            58,
+            32,
+            115,
+            99,
+            116,
+            112,
+            45,
+            114,
+            115,
+            32,
+            112,
+            105,
+            110,
+            103,
+            32,
+            58,
+            32,
+            51,
+        ],
+        rcv_info: None,
+        nxt_info: None,
+    },
+)
+received: Data(
+    ReceivedData {
+        payload: [
+            112,
+            111,
+            110,
+            103,
+            58,
+            32,
+            115,
+            99,
+            116,
+            112,
+            45,
+            114,
+            115,
+            32,
+            112,
+            105,
+            110,
+            103,
+            32,
+            58,
+            32,
+            52,
+        ],
+        rcv_info: None,
+        nxt_info: None,
+    },
+)
+received: Data(
+    ReceivedData {
+        payload: [
+            112,
+            111,
+            110,
+            103,
+            58,
+            32,
+            115,
+            99,
+            116,
+            112,
+            45,
+            114,
+            115,
+            32,
+            112,
+            105,
+            110,
+            103,
+            32,
+            58,
+            32,
+            53,
+        ],
+        rcv_info: None,
+        nxt_info: None,
+    },
+)
+received: Data(
+    ReceivedData {
+        payload: [
+            112,
+            111,
+            110,
+            103,
+            58,
+            32,
+            115,
+            99,
+            116,
+            112,
+            45,
+            114,
+            115,
+            32,
+            112,
+            105,
+            110,
+            103,
+            32,
+            58,
+            32,
+            54,
+        ],
+        rcv_info: None,
+        nxt_info: None,
+    },
+)
+received: Data(
+    ReceivedData {
+        payload: [
+            112,
+            111,
+            110,
+            103,
+            58,
+            32,
+            115,
+            99,
+            116,
+            112,
+            45,
+            114,
+            115,
+            32,
+            112,
+            105,
+            110,
+            103,
+            32,
+            58,
+            32,
+            55,
+        ],
+        rcv_info: None,
+        nxt_info: None,
+    },
+)
+received: Data(
+    ReceivedData {
+        payload: [
+            112,
+            111,
+            110,
+            103,
+            58,
+            32,
+            115,
+            99,
+            116,
+            112,
+            45,
+            114,
+            115,
+            32,
+            112,
+            105,
+            110,
+            103,
+            32,
+            58,
+            32,
+            56,
+        ],
+        rcv_info: None,
+        nxt_info: None,
+    },
+)
+received: Data(
+    ReceivedData {
+        payload: [
+            112,
+            111,
+            110,
+            103,
+            58,
+            32,
+            115,
+            99,
+            116,
+            112,
+            45,
+            114,
+            115,
+            32,
+            112,
+            105,
+            110,
+            103,
+            32,
+            58,
+            32,
+            57,
+        ],
+        rcv_info: None,
+        nxt_info: None,
+    },
+)
+michael@workhorse3:~/ellora$ 
+
+
+```
